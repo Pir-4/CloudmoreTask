@@ -11,7 +11,7 @@ class UserRest:
         base_rest = BaseRestApi()
         base_rest.update_header({"W-Token": "Ilovemyboss"})
         users = users if isinstance(users, list) else [users]
-        result = base_rest.request("POST", TC.REST_OBJ_USER, TC.USER_CREATELIST, params=users)
+        result = base_rest.request("POST", TC.REST_OBJ_USER, TC.USER_CREATE_LIST, params=users)
         return result["status_code"]
 
     @staticmethod
