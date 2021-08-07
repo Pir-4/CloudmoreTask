@@ -3,6 +3,8 @@ from http import HTTPStatus
 from modules.rest_functions.user_rest import UserRest
 from modules.utils import generator
 
+#TODO create teardown
+
 
 @pytest.mark.parametrize('input_body', generator.get_bodies(excluded_params=["id"]))
 def test_positive_create(input_body):
@@ -34,7 +36,7 @@ def test_positive_modify(input_body, modify_body):
     _, input_user = UserRest.get(input_body["username"])
     assert UserRest.modify(input_body["username"], modify_body) == HTTPStatus.OK, \
            "The PUT returned unexpected status code"
-    status, modify_user = UserRest.get(input_body["username"])
+    status, modify_user = UserRest.get(modify_body["username"])
     assert status == HTTPStatus.OK, "The GET returned unexpected status code"
     modify_user_id = modify_user.pop("id")
     assert modify_user == modify_body, "User doesn't have modified body"
