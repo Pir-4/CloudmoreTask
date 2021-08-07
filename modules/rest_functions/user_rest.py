@@ -1,6 +1,6 @@
 from modules.rest_functions.base_rest import BaseRestApi
 from modules import tests_constants as TC
-
+import json
 
 class UserRest:
     """"""
@@ -15,14 +15,16 @@ class UserRest:
         return result["status_code"]
 
     @staticmethod
-    def get(user_name):
+    def get(user_name, expectedError=False):
         """"""
         base_rest = BaseRestApi()
         result = base_rest.request("GET", TC.REST_OBJ_USER, user_name)
-        return result["status_code"], result["text"]
+        if expectedError:
+            return result["status_code"], result
+        return result["status_code"], json.loads(result["text"])
 
     @staticmethod
-    def modify( user_name, body):
+    def modify(user_name, body):
         """"""
         base_rest = BaseRestApi()
         result = base_rest.request("PUT", TC.REST_OBJ_USER, user_name, body)
