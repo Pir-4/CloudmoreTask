@@ -25,7 +25,7 @@ def test_positive_delete(input_body):
     status, _ = UserRest.get(input_body["username"])
     assert status == HTTPStatus.OK, "The GET returned unexpected status code"
     assert UserRest.delete(input_body["username"]), "Un success user deleting"
-    status, _ = UserRest.get(input_body["username"], expectedError=True)
+    status, _ = UserRest.get(input_body["username"], expected_error=True)
     assert status == HTTPStatus.NOT_FOUND, "The DELETE returned unexpected status code"
 
 

@@ -41,7 +41,7 @@ def test_negative_modify_non_exist_user():
 
 
 @pytest.mark.parametrize('input_body, modify_body', generator.get_negative_put_bodies())
-def test_positive_modify(input_body, modify_body):
+def test_negative_modify(input_body, modify_body):
     """"""
     assert UserRest.create(input_body) == HTTPStatus.OK, "The POST returned unexpected status code"
     _, input_user = UserRest.get(input_body["username"])
