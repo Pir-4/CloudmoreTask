@@ -8,7 +8,7 @@ from modules.utils import generator
 
 @pytest.mark.parametrize('input_body', generator.get_bodies(excluded_params=["id"]))
 def test_positive_create(input_body):
-    """"""
+    """ Verify positive cases for creating and getting users entries """
     assert UserRest.create(input_body) == HTTPStatus.OK, "The POST returned unexpected status code"
     status, user = UserRest.get(input_body["username"])
     assert status == HTTPStatus.OK, "The GET returned unexpected status code"
@@ -20,7 +20,7 @@ def test_positive_create(input_body):
 
 @pytest.mark.parametrize('input_body', generator.get_bodies(excluded_params=["id"]))
 def test_positive_delete(input_body):
-    """"""
+    """ Verify positive cases for deleting """
     assert UserRest.create(input_body) == HTTPStatus.OK, "The POST returned unexpected status code"
     status, _ = UserRest.get(input_body["username"])
     assert status == HTTPStatus.OK, "The GET returned unexpected status code"
@@ -31,7 +31,7 @@ def test_positive_delete(input_body):
 
 @pytest.mark.parametrize('input_body, modify_body', generator.get_bodies_modify(excluded_params=["id"]))
 def test_positive_modify(input_body, modify_body):
-    """"""
+    """ Verify positive cases for modifying """
     assert UserRest.create(input_body) == HTTPStatus.OK, "The POST returned unexpected status code"
     _, input_user = UserRest.get(input_body["username"])
     assert UserRest.modify(input_body["username"], modify_body) == HTTPStatus.OK, \

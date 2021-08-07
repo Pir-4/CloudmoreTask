@@ -8,20 +8,20 @@ from modules.utils import generator
 
 @pytest.mark.parametrize('input_body', generator.get_negative_post_bodies())
 def test_negative_create(input_body):
-    """"""
+    """ Verify create with non valid bodies """
     assert UserRest.create(input_body) == HTTPStatus.BAD_REQUEST, \
         "The POST returned unexpected status code with body {}".format(input_body)
 
 
 def test_negative_get():
-    """"""
+    """ Verify get response to non exist entry """
     non_exist_user = generator.create_body()
     status, _ = UserRest.get(non_exist_user["username"])
     assert status == HTTPStatus.NOT_FOUND, "Was get ono exist user"
 
 
 def test_negative_delete():
-    """"""
+    """ Verify delete response to non exist entry """
     status = HTTPStatus.OK
     non_exist_user = {}
     while status != HTTPStatus.NOT_FOUND:
@@ -31,7 +31,7 @@ def test_negative_delete():
 
 
 def test_negative_modify_non_exist_user():
-    """"""
+    """Verify modify response to non exist entry"""
     status = HTTPStatus.OK
     non_exist_user = {}
     while status != HTTPStatus.NOT_FOUND:
@@ -42,7 +42,7 @@ def test_negative_modify_non_exist_user():
 
 @pytest.mark.parametrize('input_body, modify_body', generator.get_negative_put_bodies())
 def test_negative_modify(input_body, modify_body):
-    """"""
+    """ Verify modify with non valid bodies """
     assert UserRest.create(input_body) == HTTPStatus.OK, "The POST returned unexpected status code"
     _, input_user = UserRest.get(input_body["username"])
     assert UserRest.modify(input_body["username"], modify_body) == HTTPStatus.BAD_REQUEST, \
