@@ -14,7 +14,7 @@ class UserRest:
 
         :param users: list of users bodies
         :type users: list
-        :return: status code
+        :returns: status code
         :type: int
         """
         base_rest = BaseRestApi()
@@ -30,7 +30,7 @@ class UserRest:
         :type user_name: str
         :param expected_error:
         :type expected_error: true if request is unsuccess
-        :return: status code and user body
+        :returns: status code and user body
         :rtype: tuple
         """
         base_rest = BaseRestApi()
@@ -47,7 +47,7 @@ class UserRest:
         :type user_name: str
         :param body: new body for modifying
         :type body: dict
-        :return: status code
+        :returns: status code
         :rtype: int
         """
         base_rest = BaseRestApi()
@@ -60,7 +60,7 @@ class UserRest:
 
         :param user_name: user name
         :type user_name: str
-        :return: status code
+        :returns: status code
         :rtype: int
         """
         base_rest = BaseRestApi()

@@ -32,7 +32,7 @@ class BaseRestApi:
         :type obj_id: str
         :param params: request body
         :type params: dict
-        :return: main parts of response: status_code, reason, text, success
+        :returns: main parts of response: status_code, reason, text, success
         :rtype: dict
         """
         request_url = self._get_url(self._baseUrl, rest_obj, obj_id)
@@ -59,7 +59,7 @@ class BaseRestApi:
 
         :param args: parts of url for joining
         :type: list
-        :return: full request url
+        :returns: full request url
         :rtype: str
         """
         if self._baseUrl not in args:

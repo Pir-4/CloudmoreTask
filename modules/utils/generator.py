@@ -7,7 +7,15 @@ from modules import tests_constants as TC
 
 
 def get_bodies(number=5, excluded_params=None):
-    """"""
+    """ Generate bodies for create cases
+
+    :param number: number of bodies
+    :type number: int
+    :param excluded_params: parameter names witch excluded from generated body
+    :type excluded_params: list
+    :returns: valid bodies
+    :rtype: list
+    """
     bodies = []
     for _ in range(number):
         bodies.append(create_body(excluded_params))
@@ -15,7 +23,15 @@ def get_bodies(number=5, excluded_params=None):
 
 
 def get_bodies_modify(number=5, excluded_params=None):
-    """"""
+    """ Generate bodies for modify cases
+
+    :param number: number of bodies
+    :type number: int
+    :param excluded_params: parameter names witch excluded from generated body
+    :type excluded_params: list
+    :returns: valid bodies
+    :rtype: list
+    """
     bodies = []
     for _ in range(number):
         first_body = create_body(excluded_params)
@@ -28,7 +44,11 @@ def get_bodies_modify(number=5, excluded_params=None):
 
 
 def get_negative_post_bodies():
-    """"""
+    """ Generate non valid bodies for create cases
+
+    :returns: non valid bodies
+    :rtype: list
+    """
     bodies = [create_body()]#body with id
     param_list = copy(TC.PARAM_LIST)
     param_list.remove("id")
@@ -40,7 +60,11 @@ def get_negative_post_bodies():
 
 
 def get_negative_put_bodies():
-    """"""
+    """ Generate non valid bodies for modify cases
+
+    :returns: non valid bodies
+    :rtype: list
+    """
     body = create_body(excluded_params=["id"])
     modify_body = deepcopy(body)
     modify_body.update({"id": random.randint(0, sys.maxsize)})
@@ -60,7 +84,15 @@ def get_negative_put_bodies():
 
 
 def create_body(excluded_params=None, is_bad_format=False):
-    """"""
+    """ Create body
+
+    :param excluded_params: parameter names witch excluded from generated body
+    :type excluded_params: list
+    :param is_bad_format: generate body with non format parameters
+    :type is_bad_format: bool
+    :returns: body
+    :rtype: dict
+    """
     excluded_params = excluded_params or []
     excluded_params = excluded_params if isinstance(excluded_params, list) else [excluded_params]
     gen_funcs = {"int": lambda: random.randint(0, sys.maxsize),
@@ -80,7 +112,19 @@ def create_body(excluded_params=None, is_bad_format=False):
 
 
 def gen_string(prefix="", allowed=None, size=None, postfix=""):
-    """"""
+    """ Generate string
+
+    :param prefix: prefix of generated string
+    :type prefix: str
+    :param allowed: list of allowed symbols: letters, digits, punctuation
+    :type allowed: list
+    :param size: length of string
+    :type size: int
+    :param postfix: postfix of generated string
+    :type postfix: str
+    :returns:
+    :rtype: str
+    """
     symbols_dict = {"letters": string.ascii_letters, "digits": string.digits,
                     "punctuation": string.punctuation}
     allowed = allowed or ["letters", "digits", "punctuation"]
