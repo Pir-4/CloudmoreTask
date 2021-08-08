@@ -1,4 +1,5 @@
 class RestConstants:
+    """ Constants for Rest API tests """
     BASE_REST_URL = "https://petstore.swagger.io/v2"
     REST_OBJ_USER = "user"
     USER_CREATE_LIST = "createWithList"
@@ -10,6 +11,7 @@ class RestConstants:
 
 
 class UIConstants:
+    """ Constants for UI tests """
     BASE_UI_URL = "https://web.cloudmore.com/"
     MENU_PLATFORM = "PLATFORM"
     MENU_SOLUTIONS = "SOLUTIONS"
