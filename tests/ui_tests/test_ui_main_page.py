@@ -16,7 +16,7 @@ def test_verify_top_menu(browser):
     start_page = MainPage(browser)
     start_page.load()
     start_page.close_pop_up_windows()
-    assert start_page.logo()
+    assert start_page.logo(), "Not found logo on the start page"
     menu_items = start_page.get_menu_items()
     text_menu_items = [item.text for item in menu_items]
     for menu_name in UIC.MENU_PAGE_NAMES:
