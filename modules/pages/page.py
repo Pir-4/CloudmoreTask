@@ -3,9 +3,6 @@ from selenium.webdriver.common.by import By
 
 class Page:
     """"""
-    #LOGO_ID = None
-    #LOGO_SEARCH =
-
     def __init__(self, driver, url):
         """"""
         self._driver = driver
@@ -18,6 +15,10 @@ class Page:
     def _get_item(self, locator):
         """"""
         return self._driver.find_element(*locator)
+
+    def _get_items(self, locator):
+        """"""
+        return self._driver.find_elements(*locator)
 
     def button_click(self, locator):
         self._get_item(locator).click()
