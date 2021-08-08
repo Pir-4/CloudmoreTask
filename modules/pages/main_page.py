@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 from modules.pages.page import Page
 from modules.tests_constants import UIConstants as UIC
@@ -10,6 +11,8 @@ class MainPage(Page):
     DECLINE_BUTTON = (By.ID, "hs-eu-decline-button")
     CLOSE_POPUP_BUTTON = (By.CLASS_NAME, "leadinModal-close")
     MENU_ITEM_XPATH = '//*[@id="hs_menu_wrapper_module_146731076570911"]/ul/li[{0}]/a'
+    SEARCH_BUTTON = (By.XPATH, '//*[@id="hs_cos_wrapper_module_15306484973591482"]')
+    SEARCH_INPUT = (By.XPATH, '//*[@id="hs_cos_wrapper_module_1530555777115370"]/div/form/input')
 
     def __init__(self, driver):
         Page.__init__(self, driver, UIC.BASE_UI_URL)
@@ -38,6 +41,13 @@ class MainPage(Page):
         text = menu_item[0].text
         menu_item[0].click()
         return menu_pages[text.upper()](self._driver)
+
+    def search(self, phrase):
+        from modules.pages.search_page import SearchPage
+        self.button_click(self.SEARCH_BUTTON)
+        search_item = self._get_item(self.SEARCH_INPUT)
+        search_item.send_keys(phrase, Keys.RETURN)
+        return SearchPage(self._driver)
 
 
 class PlatformPage(MainPage):
