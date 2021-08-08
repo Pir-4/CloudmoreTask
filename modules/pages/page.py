@@ -3,7 +3,8 @@ from selenium.webdriver.common.by import By
 
 class Page:
     """"""
-    LOGO_SEARCH = (By.ID, "hs-link-module_14891423382401005")
+    #LOGO_ID = None
+    #LOGO_SEARCH =
 
     def __init__(self, driver, url):
         """"""
@@ -22,4 +23,4 @@ class Page:
         self._get_item(locator).click()
 
     def logo(self):
-        return self._get_item(self.LOGO_SEARCH)
+        return self._get_item((By.ID, self.LOGO_ID))
