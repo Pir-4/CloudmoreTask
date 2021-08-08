@@ -18,11 +18,19 @@ def test_verify_top_menu(browser):
     assert start_page.logo()
     menu_items = start_page.get_menu_items()
     text_menu_items = [item.text for item in menu_items]
-    assert "PLATFORM" in text_menu_items
-    assert "SOLUTIONS" in text_menu_items
-    assert "ABOUT US" in text_menu_items
-    assert "CONTACT US" in text_menu_items
-    assert "BLOG" in text_menu_items
-    assert "CASE STUDIES" in text_menu_items
+    for menu_name in ["PLATFORM", "SOLUTIONS", "ABOUT US", "CONTACT US", "BLOG", "CASE STUDIES"]:
+        assert menu_name in text_menu_items, "Not found menu {} on the start page".format(menu_name)
+
+
+def test_verify_contact_on_pages(browser):
+    current_page = MainPage(browser)
+    current_page.load()
+    current_page.close_pop_up_windows()
+    assert current_page.logo(), "Not found logo on the start page"
+    for page_name in ["PLATFORM", "SOLUTIONS", "ABOUT US", "CONTACT US", "BLOG", "CASE STUDIES"]:
+        current_page = current_page.move_menu_item(page_name)
+        assert current_page.logo(), "Not found logo on the {} page".format(page_name)
+
+    contact_us_page = current_page.move_menu_item("CONTACT US")
 
 
