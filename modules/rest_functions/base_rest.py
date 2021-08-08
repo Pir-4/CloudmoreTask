@@ -1,5 +1,5 @@
 import requests
-from modules import tests_constants as TC
+from modules.tests_constants import RestConstants as RC
 
 
 class BaseRestApi:
@@ -11,7 +11,7 @@ class BaseRestApi:
                       "PUT": requests.put,
                       "DEL": requests.delete}
 
-    def __init__(self, base_url=TC.BASE_REST_URL):
+    def __init__(self, base_url=RC.BASE_REST_URL):
         """ Init class
 
         :param base_url: url of an information system

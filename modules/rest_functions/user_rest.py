@@ -1,5 +1,5 @@
 from modules.rest_functions.base_rest import BaseRestApi
-from modules import tests_constants as TC
+from modules.tests_constants import RestConstants as RC
 import json
 
 
@@ -19,7 +19,7 @@ class UserRest:
         """
         base_rest = BaseRestApi()
         users = users if isinstance(users, list) else [users]
-        result = base_rest.request("POST", TC.REST_OBJ_USER, TC.USER_CREATE_LIST, params=users)
+        result = base_rest.request("POST", RC.REST_OBJ_USER, RC.USER_CREATE_LIST, params=users)
         return result["status_code"]
 
     @staticmethod
@@ -34,7 +34,7 @@ class UserRest:
         :rtype: tuple
         """
         base_rest = BaseRestApi()
-        result = base_rest.request("GET", TC.REST_OBJ_USER, user_name)
+        result = base_rest.request("GET", RC.REST_OBJ_USER, user_name)
         if expected_error:
             return result["status_code"], result
         return result["status_code"], json.loads(result["text"])
@@ -51,7 +51,7 @@ class UserRest:
         :rtype: int
         """
         base_rest = BaseRestApi()
-        result = base_rest.request("PUT", TC.REST_OBJ_USER, user_name, body)
+        result = base_rest.request("PUT", RC.REST_OBJ_USER, user_name, body)
         return result["status_code"]
 
     @staticmethod
@@ -64,5 +64,5 @@ class UserRest:
         :rtype: int
         """
         base_rest = BaseRestApi()
-        result = base_rest.request("DEL", TC.REST_OBJ_USER, user_name)
+        result = base_rest.request("DEL", RC.REST_OBJ_USER, user_name)
         return result["status_code"]

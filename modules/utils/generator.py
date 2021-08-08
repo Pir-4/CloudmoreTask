@@ -3,7 +3,7 @@ import sys
 import string
 from copy import copy, deepcopy
 
-from modules import tests_constants as TC
+from modules.tests_constants import RestConstants as RC
 
 
 def get_bodies(number=5, excluded_params=None):
@@ -50,7 +50,7 @@ def get_negative_post_bodies():
     :rtype: list
     """
     bodies = [create_body()]#body with id
-    param_list = copy(TC.PARAM_LIST)
+    param_list = copy(RC.PARAM_LIST)
     param_list.remove("id")
     for param_name in param_list:
         bodies.append(create_body(excluded_params=["id", param_name]))
@@ -70,7 +70,7 @@ def get_negative_put_bodies():
     modify_body.update({"id": random.randint(0, sys.maxsize)})
     bodies = [(body, modify_body)]
 
-    param_list = copy(TC.PARAM_LIST)
+    param_list = copy(RC.PARAM_LIST)
     param_list.remove("id")
     for param_name in param_list:
         body = create_body(excluded_params=["id"])
@@ -101,12 +101,12 @@ def create_body(excluded_params=None, is_bad_format=False):
                  "name": lambda: gen_string(allowed=["letters"]),
                  "email": lambda: gen_string(allowed=["letters", "digits"], size=11, postfix="@mail.com")}
     body = {}
-    for body_param in TC.PARAM_LIST:
+    for body_param in RC.PARAM_LIST:
         if body_param in excluded_params:
             continue
-        param_format = TC.PARAM_TYPES[body_param]
+        param_format = RC.PARAM_TYPES[body_param]
         if is_bad_format:
-            param_format = random.choice([item for item in TC.PARAM_TYPES.values() if item != param_format])
+            param_format = random.choice([item for item in RC.PARAM_TYPES.values() if item != param_format])
         body[body_param] = gen_funcs[param_format]()
     return body
 
