@@ -11,7 +11,7 @@ class BaseRestApi:
                       "PUT": requests.put,
                       "DEL": requests.delete}
 
-    def __init__(self, base_url=TC.BASE_URL):
+    def __init__(self, base_url=TC.BASE_REST_URL):
         """ Init class
 
         :param base_url: url of an information system

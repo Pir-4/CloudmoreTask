@@ -1,4 +1,6 @@
-BASE_URL = "https://petstore.swagger.io/v2"
+BASE_REST_URL = "https://petstore.swagger.io/v2"
+BASE_UI_URL = "https://web.cloudmore.com/"
+
 REST_OBJ_USER = "user"
 
 USER_CREATE_LIST = "createWithList"
