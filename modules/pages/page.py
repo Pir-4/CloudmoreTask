@@ -16,6 +16,9 @@ class Page:
         self._driver.maximize_window()
         self._driver.get(self._url)
 
+    def change_window_size(self, width, height):
+        self._driver.set_window_size(width, height)
+
     def _get_item(self, locator):
         """"""
         return self._driver.find_element(*locator)
