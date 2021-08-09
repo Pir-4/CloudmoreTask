@@ -8,6 +8,10 @@ class Page:
         self._driver = driver
         self._url = url
 
+    @property
+    def driver(self):
+        return self._driver
+
     def load(self):
         self._driver.maximize_window()
         self._driver.get(self._url)
