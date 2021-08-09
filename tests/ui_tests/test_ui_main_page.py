@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 from modules.pages.main_page import MainPage
 from modules.tests_constants import UIConstants as UIC
-
+from modules.utils.file_utils import save_screenshot
 
 @pytest.fixture()
 def browser():
@@ -42,4 +42,5 @@ def start_page(browser):
 
 def test_verity_search(start_page, keyword="Högset"):
     search_page = start_page.search(keyword)
-    search_page.pages()
+    # search_page.pages()
+    save_screenshot(search_page)
