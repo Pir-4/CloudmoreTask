@@ -40,7 +40,12 @@ def start_page(browser):
 #     assert contact_us_page.contact_body_footer(), "Contact body doesn't exist on Contact us page footer"
 
 
-def test_verity_search(start_page, keyword="Högset"):
+@pytest.mark.parametrize('keyword', UIC.SEARCH_WORDS)
+def test_verity_search(start_page, keyword):
     search_page = start_page.search(keyword)
-    # search_page.pages()
-    save_screenshot(search_page)
+    count = 0
+    for page in search_page.pages():
+        count += 1
+        if count == 3:
+            break
+    save_screenshot(page)
