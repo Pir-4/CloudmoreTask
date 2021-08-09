@@ -43,9 +43,7 @@ def start_page(browser):
 @pytest.mark.parametrize('keyword', UIC.SEARCH_WORDS)
 def test_verity_search(start_page, keyword):
     search_page = start_page.search(keyword)
-    count = 0
-    for page in search_page.pages():
-        count += 1
-        if count == 3:
+    for count, page in enumerate(search_page.pages()):
+        if count == 2:
             break
     save_screenshot(page)
