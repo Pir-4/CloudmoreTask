@@ -20,28 +20,36 @@ def start_page(browser):
     return page
 
 
-# def test_verify_top_menu(start_page):
-#     assert start_page.logo(), "Not found logo on the start page"
-#     menu_items = start_page.get_menu_items()
-#     text_menu_items = [item.text for item in menu_items]
-#     for menu_name in UIC.MENU_PAGE_NAMES:
-#         assert menu_name in text_menu_items, "Not found menu {} on the start page".format(menu_name)
-#
-#
-# def test_verify_contact_on_pages(start_page):
-#     current_page = start_page
-#     assert current_page.logo(), "Not found logo on the start page"
-#     for page_name in UIC.MENU_PAGE_NAMES:
-#         current_page = current_page.move_menu_item(page_name)
-#         assert current_page.logo(), "Not found logo on the {} page".format(page_name)
-#
-#     contact_us_page = current_page.move_menu_item(UIC.MENU_CONTACT_US)
-#     assert contact_us_page.contact_body(), "Contact body doesn't exist on Contact us page"
-#     assert contact_us_page.contact_body_footer(), "Contact body doesn't exist on Contact us page footer"
+@pytest.fixture(params=["full", (808, 610)])
+def diff_page_size(start_page, request):
+    if request.param is not "full":
+        start_page.change_window_size(*request.param)
+    return start_page
+
+
+def test_verify_top_menu(start_page):
+    assert start_page.logo(), "Not found logo on the start page"
+    menu_items = start_page.get_menu_items()
+    text_menu_items = [item.text for item in menu_items]
+    for menu_name in UIC.MENU_PAGE_NAMES:
+        assert menu_name in text_menu_items, "Not found menu {} on the start page".format(menu_name)
+
+
+def test_verify_contact_on_pages(start_page):
+    current_page = start_page
+    assert current_page.logo(), "Not found logo on the start page"
+    for page_name in UIC.MENU_PAGE_NAMES:
+        current_page = current_page.move_menu_item(page_name)
+        assert current_page.logo(), "Not found logo on the {} page".format(page_name)
+
+    contact_us_page = current_page.move_menu_item(UIC.MENU_CONTACT_US)
+    assert contact_us_page.contact_body(), "Contact body doesn't exist on Contact us page"
+    assert contact_us_page.contact_body_footer(), "Contact body doesn't exist on Contact us page footer"
 
 
 @pytest.mark.parametrize('keyword', UIC.SEARCH_WORDS)
-def test_verity_search(start_page, keyword):
+def test_verity_search(diff_page_size, keyword):
+    start_page = diff_page_size
     search_page = start_page.search(keyword)
     for count, page in enumerate(search_page.pages()):
         if count == 2:
