@@ -7,6 +7,7 @@ from modules.utils.file_utils import save_screenshot
 
 @pytest.fixture()
 def browser_chrome_pc():
+    """ Init Chrome web driver for PC """
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
     yield driver
@@ -15,6 +16,7 @@ def browser_chrome_pc():
 
 @pytest.fixture()
 def browser_chrome_mobile_nexus_5():
+    """ Init Chrome web driver for Nexus 5 """
     options = webdriver.ChromeOptions()
     options.add_experimental_option(*UIC.CHROME_OPTIONS_NEXUS_5)
     driver = webdriver.Chrome(options=options)
@@ -25,6 +27,7 @@ def browser_chrome_mobile_nexus_5():
 
 @pytest.fixture()
 def start_page_pc(browser_chrome_pc):
+    """ Load start page for PC """
     page = MainPage(browser_chrome_pc)
     page.load()
     page.close_pop_up_windows()
@@ -33,6 +36,7 @@ def start_page_pc(browser_chrome_pc):
 
 @pytest.fixture()
 def start_page_mobile_nexus_5(browser_chrome_mobile_nexus_5):
+    """ Load start page for Nexus """
     page = MainPage(browser_chrome_mobile_nexus_5)
     page.load()
     page.close_pop_up_windows()
@@ -41,6 +45,7 @@ def start_page_mobile_nexus_5(browser_chrome_mobile_nexus_5):
 
 @pytest.fixture()
 def start_page_param(request):
+    """ Get start page by web driver type"""
     if request.param == "pc":
         return request.getfixturevalue("start_page_pc")
     elif request.param == "nexus5":
@@ -50,6 +55,7 @@ def start_page_param(request):
 
 
 def test_verify_top_menu(start_page_pc):
+    """Verify items of top menu"""
     assert start_page_pc.logo(), "Not found logo on the start page"
     menu_items = start_page_pc.get_menu_items()
     text_menu_items = [item.text for item in menu_items]
@@ -58,6 +64,7 @@ def test_verify_top_menu(start_page_pc):
 
 
 def test_verify_contact_on_pages(start_page_pc):
+    """Verify redirect to other pages and contact bodies on 'contact us' page"""
     current_page = start_page_pc
     assert current_page.logo(), "Not found logo on the start page"
     for page_name in UIC.MENU_PAGE_NAMES:
@@ -72,8 +79,9 @@ def test_verify_contact_on_pages(start_page_pc):
 @pytest.mark.parametrize('start_page_param', ["pc", "nexus5"], indirect=True)
 @pytest.mark.parametrize('keyword', UIC.SEARCH_WORDS)
 def test_verity_search(start_page_param, keyword):
+    """ Verify search result pages"""
     search_page = start_page_param.search(keyword)
     for count, page in enumerate(search_page.pages()):
         if count == 2:
             break
-    save_screenshot(page)
+    save_screenshot(page, keyword)
