@@ -5,6 +5,16 @@ from copy import copy, deepcopy
 
 from modules.tests_constants import RestConstants as RC
 
+positive_body = {"id": 0,
+                 "username": "TestUser",
+                 "firstName": "TestFirstName",
+                 "lastName": "TestLastName",
+                 "email": "email@email.com",
+                 "password": "Password",
+                 "phone": "78526",
+                 "userStatus": 0
+                 }
+
 
 def get_bodies(number=5, excluded_params=None):
     """ Generate bodies for create cases
@@ -16,7 +26,7 @@ def get_bodies(number=5, excluded_params=None):
     :returns: valid bodies
     :rtype: list
     """
-    bodies = []
+    bodies = [positive_body]
     for _ in range(number):
         bodies.append(create_body(excluded_params))
     return bodies
