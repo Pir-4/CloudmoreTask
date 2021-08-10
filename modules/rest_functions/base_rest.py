@@ -3,9 +3,8 @@ from modules.tests_constants import RestConstants as RC
 
 
 class BaseRestApi:
-    """
-    Provide base Rest methods
-    """
+    """ Provide base Rest methods """
+
     _requestsCalls = {"GET": requests.get,
                       "POST": requests.post,
                       "PUT": requests.put,

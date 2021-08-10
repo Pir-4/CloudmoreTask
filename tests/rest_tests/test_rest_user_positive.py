@@ -14,7 +14,8 @@ def test_positive_create(input_body):
     assert status == HTTPStatus.OK, "The GET returned unexpected status code"
     user_id = user.pop("id")
     assert isinstance(user_id, int) and user_id, "User id isn't int or equal 0"
-    assert not user.get("password") and user.get("password") == input_body["password"], "GET return user password"
+    # assert not user.get("password"), "GET return user password"
+    input_body.pop("id")
     assert user == input_body, "The expected body doesn't equal actual"
 
 
@@ -42,4 +43,3 @@ def test_positive_modify(input_body, modify_body):
     assert modify_user == modify_body, "User doesn't have modified body"
     assert modify_user_id == input_user["id"], "Users objects has different id values"
     assert modify_user != input_body, "User after a modification has the same body that it was created"
-

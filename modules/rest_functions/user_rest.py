@@ -4,9 +4,7 @@ import json
 
 
 class UserRest:
-    """
-    Provide Rest API for User rest object
-    """
+    """ Provide Rest API for User rest object """
 
     @staticmethod
     def create(users):

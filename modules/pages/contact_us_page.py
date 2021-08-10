@@ -24,4 +24,3 @@ class ContactUsPage(MainPage):
         :rtype: selenium.webelement
         """
         return self.get_element((By.XPATH, self.CONTACT_BODY_FOOTER_XPATH))
-
