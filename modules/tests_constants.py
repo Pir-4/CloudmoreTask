@@ -23,3 +23,5 @@ class UIConstants:
 
     SCREENSHOT_FOLDER = "logs/screenshots"
     SEARCH_WORDS = ["Högset", "o"]
+
+    CHROME_OPTIONS_NEXUS_5 = ("mobileEmulation", {"deviceName": "Nexus 5"})
