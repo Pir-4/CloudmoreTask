@@ -2,33 +2,59 @@ from selenium.webdriver.common.by import By
 
 
 class Page:
-    """"""
+    """Provide base methods and properties of page"""
+
     def __init__(self, driver, url):
-        """"""
+        """ Init class
+
+        :param driver: wev driver
+        :type driver: selenium.webdriver
+        :param url: url of page
+        :type url: str
+        """
         self._driver = driver
         self._url = url
 
     @property
     def driver(self):
+        """ Driver getter
+
+        :returns: web driver
+        :rtype: selenium.webdriver
+        """
         return self._driver
 
     def load(self):
-        self._driver.maximize_window()
-        self._driver.get(self._url)
+        """ Load page by url
 
-    def change_window_size(self, width, height):
-        self._driver.set_window_size(width, height)
+        :returns: None
+        """
+        self.driver.maximize_window()
+        self.driver.get(self._url)
 
-    def _get_item(self, locator):
-        """"""
-        return self._driver.find_element(*locator)
+    def get_element(self, locator):
+        """ Get element
 
-    def _get_items(self, locator):
-        """"""
-        return self._driver.find_elements(*locator)
+        :param locator: search condition
+        :type locator: tuple(selenium.webdriver.common.by, str)
+        :returns: web element
+        :rtype: selenium.webelement
+        """
+        return self.driver.find_element(*locator)
 
     def button_click(self, locator):
-        self._get_item(locator).click()
+        """ Find button and click it
+
+        :param locator: search condition
+        :type locator: tuple(selenium.webdriver.common.by, str)
+        :returns: None
+        """
+        self.get_element(locator).click()
 
     def logo(self):
-        return self._get_item((By.ID, self.LOGO_ID))
+        """ Get logo
+
+        :returns: web element
+        :rtype: selenium.webelement
+        """
+        return self.get_element((By.ID, self.LOGO_ID))
